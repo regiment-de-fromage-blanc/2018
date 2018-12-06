@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import Home from './pages/Home';
 import configureStore from './store';
+import Todos from './pages/Todos';
 
 const store = configureStore({});
 
@@ -13,9 +14,10 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <Route path="/" exact component={Home}>
-            {/*<Route path="weather" />*/}
-          </Route>
+          <div>
+            <Route path="/" exact component={Home} />
+            <Route path="/todos" component={Todos} />
+          </div>
         </Router>
       </Provider>
     );

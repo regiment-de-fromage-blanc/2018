@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withHandlers } from 'recompose';
 import { firestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import '../App.css';
-import CreateTodo from '../components/todos/CreateTodo';
+import { Link } from 'react-router-dom';
 
 const enhance = compose(
   firestoreConnect([{ collection: 'todos' }]),
@@ -15,17 +15,7 @@ const enhance = compose(
 
 const Home = ({ firestore, todos }) => (
   <div className="App">
-    <div className="App-todos">
-      <h4>Todos List</h4>
-      <div>
-        {!isLoaded(todos)
-          ? 'Loading'
-          : isEmpty(todos)
-          ? 'Todo list is empty'
-          : todos.map(todo => <div>{todo.subject}</div>)}
-      </div>
-      <CreateTodo />
-    </div>
+    <Link to="/todos">Todos</Link>
   </div>
 );
 
