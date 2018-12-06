@@ -6,7 +6,14 @@ import './Status.css';
 class Status extends React.Component {
   renderCol = state => {
     return (
-      <Col xs={12} className="statusCol">
+      <Col
+        xs={12}
+        className={
+          state.status === 'Opérationnel'
+            ? 'statusOperationnal'
+            : 'statusNotOperationnal'
+        }
+      >
         <div className="statusName">{state.name}</div>
         <div className="statusStatus">{state.status}</div>
         <div className="statusBattery">{state.battery}</div>

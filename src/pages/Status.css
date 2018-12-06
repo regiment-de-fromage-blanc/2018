@@ -1,3 +1,15 @@
-.statusCol {
-  border: 1px solid black;
+.statusOperationnal,
+.statusNotOperationnal {
+  border-width: 2px;
+  border-style: solid;
+}
+
+.statusOperationnal {
+  border-color: green;
+  background-color: #cfc;
+}
+
+.statusNotOperationnal {
+  border-color: red;
+  background-color: #fcc;
 }
