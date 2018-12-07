@@ -1,0 +1,11 @@
+.statusOperationnal .badge {
+  background-color: green;
+}
+
+.statusNotOperationnal .badge {
+  background-color: red;
+}
+
+.progress {
+  margin-bottom: 0px;
+}
