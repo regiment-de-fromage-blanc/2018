@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Row, Col, Panel } from 'react-bootstrap';
+import { Grid, Row, Col, Panel, ProgressBar } from 'react-bootstrap';
 import '../App.css';
 import './Status.css';
 
@@ -19,6 +19,17 @@ class Status extends React.Component {
             <Panel.Title componentClass="h3">{state.name}</Panel.Title>
           </Panel.Heading>
           <Panel.Body>{state.status}</Panel.Body>
+          <ProgressBar
+            now={state.battery}
+            label={`${state.battery}%`}
+            bsStyle={
+              state.battery >= 66
+                ? 'success'
+                : state.battery >= 33
+                ? 'warning'
+                : 'danger'
+            }
+          />
         </Panel>
       </Col>
     );
@@ -29,17 +40,17 @@ class Status extends React.Component {
       {
         name: 'Téléphone',
         status: 'Opérationnel',
-        battery: '67%'
+        battery: '60'
       },
       {
         name: 'R2D2',
         status: 'Opérationnel',
-        battery: '100%'
+        battery: '98'
       },
       {
         name: 'Détecteur de mouvement',
         status: 'Non opérationnel',
-        battery: '0%'
+        battery: '27'
       }
     ];
 
