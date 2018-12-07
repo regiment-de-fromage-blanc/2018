@@ -25,7 +25,9 @@ class Status extends React.Component {
             <Panel.Title componentClass="h3">{state.name}</Panel.Title>
           </Panel.Heading>
           <Panel.Body>
-            <p>{state.operationnal ? 'Opérationnel' : 'Non opérationnel'}</p>
+            <p>
+              <b>{state.operationnal ? 'Opérationnel' : 'Non opérationnel'}</b>
+            </p>
             {issues}
           </Panel.Body>
           <ProgressBar
