@@ -79,13 +79,14 @@ const NewTodo = ({
       <ControlLabel>Catégorie</ControlLabel>
       <FormControl
         componentClass="select"
+        type="select"
         placeholder="select"
         onChange={onCategoryChange}
       >
         <option value="health">Santé</option>
-        <option value="photo">Photo</option>
-        <option value="énergie">Énergie</option>
-        <option value="méteo">Météo</option>
+        <option value="picture">Photo</option>
+        <option value="power">Énergie</option>
+        <option value="weather">Météo</option>
         <option value="gps">GPS</option>
       </FormControl>
       <FormControl.Feedback />
