@@ -5,9 +5,10 @@ const stamenTonerTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const stamenTonerAttr =
   '<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 const zoomLevel = 10;
-const defaultLo = [45, 5];
 const gettingCoords =
   'Getting your position... Please, share your position with us !';
+
+const link = 'https://nominatim.openstreetmap.org/search?';
 
 export default class View extends Component {
   constructor(props) {
@@ -55,8 +56,16 @@ export default class View extends Component {
         <p>Où voulez-vous aller?</p>
         <form>
           <label>
-            Destination:
-            <input type="text" name="name" />
+            Adresse:
+            <input type="text" name="adresse" />
+          </label>
+          <label>
+            Code Postal:
+            <input type="text" name="codePostal" />
+          </label>
+          <label>
+            Ville:
+            <input type="text" name="Ville" />
           </label>
           <input type="submit" value="Submit" />
         </form>
