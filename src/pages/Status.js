@@ -19,29 +19,59 @@ class Status extends React.Component {
     this.states = [
       {
         name: 'Téléphone',
-        operationnal: true,
-        battery: 60
+        battery: this.getRandomBattery(),
+        issues: this.getRandomIssues()
       },
       {
         name: 'C3PO',
-        operationnal: false,
-        battery: 77,
-        issues: [
-          'Pas de réseau non filaire détecté.',
-          'Opérations en cours, veuillez patientez.'
-        ]
+        battery: this.getRandomBattery(),
+        issues: this.getRandomIssues()
       },
       {
         name: 'R2D2',
-        operationnal: true,
-        battery: 98
+        battery: this.getRandomBattery(),
+        issues: this.getRandomIssues()
       },
       {
         name: 'Détecteur de mouvement',
-        operationnal: false,
-        battery: 27
+        battery: this.getRandomBattery(),
+        issues: this.getRandomIssues()
       }
     ];
+
+    this.states.forEach(state => {
+      if (state.hasOwnProperty('issues')) {
+        state.operationnal = state.issues.length === 0;
+      }
+    });
+  }
+
+  getRandomBattery() {
+    return Math.trunc(Math.random() * 100);
+  }
+
+  getRandomIssues() {
+    if (Math.trunc(Math.random() * 2) === 0) {
+      return [];
+    } else {
+      let issues = [];
+      const allIssues = [
+        'Pas de réseau non filaire détecté.',
+        'Opérations en cours, veuillez patientez.',
+        'Mémoire surchargée, veuillez la vider'
+      ];
+      let possibleIssues = allIssues.slice(0, allIssues.length);
+      const nbIssues = Math.trunc(Math.random() * allIssues.length);
+
+      let i = 0;
+      do {
+        const random = Math.trunc(Math.random() * possibleIssues.length);
+        issues.push(possibleIssues.splice(random, 1));
+        i++;
+      } while (i !== nbIssues);
+
+      return issues;
+    }
   }
 
   renderCol = state => {
