@@ -5,6 +5,14 @@ import './Status.css';
 
 class Status extends React.Component {
   renderCol = state => {
+    let issues = '';
+    if (state.hasOwnProperty('issues')) {
+      state.issues.forEach(issue => {
+        issues += issue + ' ';
+      });
+      issues.substring(0, issues.length - 1);
+    }
+
     return (
       <Col
         xs={12}
@@ -17,7 +25,8 @@ class Status extends React.Component {
             <Panel.Title componentClass="h3">{state.name}</Panel.Title>
           </Panel.Heading>
           <Panel.Body>
-            {state.operationnal ? 'Opérationnel' : 'Non opérationnel'}
+            <p>{state.operationnal ? 'Opérationnel' : 'Non opérationnel'}</p>
+            {issues}
           </Panel.Body>
           <ProgressBar
             now={state.battery}
@@ -41,6 +50,15 @@ class Status extends React.Component {
         name: 'Téléphone',
         operationnal: true,
         battery: 60
+      },
+      {
+        name: 'C3PO',
+        operationnal: false,
+        battery: 77,
+        issues: [
+          'Pas de réseau non filaire détecté.',
+          'Opérations en cours, veuillez patientez.'
+        ]
       },
       {
         name: 'R2D2',
