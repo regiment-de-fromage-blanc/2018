@@ -1,9 +1,9 @@
-.statusOperationnal .panel-body {
-  background-color: #cfc;
+.statusOperationnal .badge {
+  background-color: green;
 }
 
-.statusNotOperationnal .panel-body {
-  background-color: #fcc;
+.statusNotOperationnal .badge {
+  background-color: red;
 }
 
 .progress {

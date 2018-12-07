@@ -1,52 +1,12 @@
 import React from 'react';
-import { Grid, Row, Col, Panel, ProgressBar } from 'react-bootstrap';
+import { Grid, Row, Col, Panel, ProgressBar, Badge } from 'react-bootstrap';
 import '../App.css';
 import './Status.css';
 
 class Status extends React.Component {
-  renderCol = state => {
-    let issues = '';
-    if (state.hasOwnProperty('issues')) {
-      state.issues.forEach(issue => {
-        issues += issue + ' ';
-      });
-      issues.substring(0, issues.length - 1);
-    }
+  constructor(props) {
+    super(props);
 
-    return (
-      <Col
-        xs={12}
-        className={
-          state.operationnal ? 'statusOperationnal' : 'statusNotOperationnal'
-        }
-      >
-        <Panel>
-          <Panel.Heading>
-            <Panel.Title componentClass="h3">{state.name}</Panel.Title>
-          </Panel.Heading>
-          <Panel.Body>
-            <p>
-              <b>{state.operationnal ? 'Opérationnel' : 'Non opérationnel'}</b>
-            </p>
-            {issues}
-          </Panel.Body>
-          <ProgressBar
-            now={state.battery}
-            label={`${state.battery}%`}
-            bsStyle={
-              state.battery >= 66
-                ? 'success'
-                : state.battery >= 33
-                ? 'warning'
-                : 'danger'
-            }
-          />
-        </Panel>
-      </Col>
-    );
-  };
-
-  render() {
     // This 'states' is directly declared in the code because
     // we don't have the devices to get our measurements
 
@@ -56,7 +16,7 @@ class Status extends React.Component {
     // * battery (number) -> level of battery
     // * operationnal (boolean) -> is the device operationnal ?
     // * issues (String[]) (optional) -> error messages
-    const states = [
+    this.states = [
       {
         name: 'Téléphone',
         operationnal: true,
@@ -82,13 +42,50 @@ class Status extends React.Component {
         battery: 27
       }
     ];
+  }
 
+  renderCol = state => {
+    let issues = '';
+    if (state.hasOwnProperty('issues')) {
+      state.issues.forEach(issue => {
+        issues += issue + ' ';
+      });
+      issues.substring(0, issues.length - 1);
+    }
+
+    return (
+      <Col
+        xs={12}
+        className={
+          state.operationnal ? 'statusOperationnal' : 'statusNotOperationnal'
+        }
+      >
+        <Panel>
+          <Panel.Heading>
+            <Panel.Title componentClass="h3">{state.name}</Panel.Title>
+          </Panel.Heading>
+          <Panel.Body>
+            <p>
+              <Badge>
+                {state.operationnal ? 'Opérationnel' : 'Non opérationnel'}
+              </Badge>
+            </p>
+            {issues}
+          </Panel.Body>
+          <ProgressBar now={state.battery} label={`${state.battery}%`} />
+        </Panel>
+      </Col>
+    );
+  };
+
+  render() {
+    console.log(this);
     return (
       <div className="App">
         <div className="App-status">
           <h2>États des appareils</h2>
           <Grid>
-            <Row>{states.map(this.renderCol)}</Row>
+            <Row>{this.states.map(this.renderCol)}</Row>
           </Grid>
         </div>
       </div>
