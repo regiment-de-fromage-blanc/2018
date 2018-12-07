@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col, Panel } from 'react-bootstrap';
 import '../App.css';
 import './Status.css';
 
@@ -14,9 +14,12 @@ class Status extends React.Component {
             : 'statusNotOperationnal'
         }
       >
-        <div className="statusName">{state.name}</div>
-        <div className="statusStatus">{state.status}</div>
-        <div className="statusBattery">{state.battery}</div>
+        <Panel>
+          <Panel.Heading>
+            <Panel.Title componentClass="h3">{state.name}</Panel.Title>
+          </Panel.Heading>
+          <Panel.Body>{state.status}</Panel.Body>
+        </Panel>
       </Col>
     );
   };
@@ -43,6 +46,7 @@ class Status extends React.Component {
     return (
       <div className="App">
         <div className="App-status">
+          <h2>États des appareils</h2>
           <Grid>
             <Row>{states.map(this.renderCol)}</Row>
           </Grid>
