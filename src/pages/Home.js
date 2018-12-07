@@ -15,9 +15,18 @@ const enhance = compose(
 
 const Home = ({ firestore, todos }) => (
   <div className="App">
-    <Link to="/todos">Todos</Link>
+    <ul>
+      <li>
+        <Link to="/todos">Todos</Link>
+      </li>
+      <li>
+        <Link to="/todos">Weather</Link>
+      </li>
+      <li>
+        <Link to="/todos">Status</Link>
+      </li>
+    </ul>
     <br />
-    <Link to="/weather">Weather</Link>
   </div>
 );
 

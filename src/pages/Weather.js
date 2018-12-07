@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-//import {compose} from 'redux';
-//import {connect} from 'react-redux';
-//import {withHandlers} from 'recompose';
-//import {firestoreConnect, isLoaded, isEmpty} from 'react-redux-firebase';
 import '../App.css';
 import './Weather.css';
 import { Grid, Row, Col } from 'react-bootstrap';
@@ -46,37 +42,8 @@ class Weather extends Component {
     super(props);
 
     this.state = {
-      loading: false,
-      data: {
-        coord: { lon: 4.87, lat: 45.77 },
-        weather: [
-          { id: 701, main: 'Mist', description: 'mist', icon: '50n' },
-          { id: 741, main: 'Fog', description: 'fog', icon: '50n' }
-        ],
-        base: 'stations',
-        main: {
-          temp: 282.35,
-          pressure: 1025,
-          humidity: 93,
-          temp_min: 280.15,
-          temp_max: 284.15
-        },
-        visibility: 4100,
-        wind: { speed: 1.5 },
-        clouds: { all: 90 },
-        dt: 1544139000,
-        sys: {
-          type: 1,
-          id: 6505,
-          message: 0.0377,
-          country: 'FR',
-          sunrise: 1544166449,
-          sunset: 1544198173
-        },
-        id: 2968254,
-        name: 'Villeurbanne',
-        cod: 200
-      }
+      loading: true,
+      data: null
     };
 
     function getLocation() {
@@ -87,13 +54,18 @@ class Weather extends Component {
       });
     }
 
-    //  getLocation()
-    //     .then(position => fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&APPID=${APIKEY}`))
-    //      .then(data => data.json())
-    //      .then(data => {
-    //          this.setState({loading: false, data: data});
-    //          console.log(this.state.data);
-    //      });
+    getLocation()
+      .then(position =>
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${
+            position.latitude
+          }&lon=${position.longitude}&APPID=${APIKEY}`
+        )
+      )
+      .then(data => data.json())
+      .then(data => {
+        this.setState({ loading: false, data: data });
+      });
   }
 
   renderLoaded() {

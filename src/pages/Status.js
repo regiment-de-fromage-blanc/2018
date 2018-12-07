@@ -109,7 +109,6 @@ class Status extends React.Component {
   };
 
   render() {
-    console.log(this);
     return (
       <div className="App">
         <div className="App-status">

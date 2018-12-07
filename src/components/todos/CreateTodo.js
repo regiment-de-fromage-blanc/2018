@@ -33,7 +33,8 @@ const enhance = compose(
         subject: props.subject,
         content: props.content || '',
         status: props.status || TODO,
-        category: props.category || ''
+        category: props.category || '',
+        dueDate: props.dueDate
       });
       return false;
     }
