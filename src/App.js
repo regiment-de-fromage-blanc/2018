@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import configureStore from './store';
 import Todos from './pages/Todos';
+import Weather from './pages/Weather';
 import Status from './pages/Status';
 
 const store = configureStore({});
@@ -18,6 +19,7 @@ class App extends Component {
           <div>
             <Route path="/" exact component={Home} />
             <Route path="/todos" component={Todos} />
+            <Route path="/weather" component={Weather} />
             <Route path="/status" component={Status} />
           </div>
         </Router>
