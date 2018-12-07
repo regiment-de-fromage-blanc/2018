@@ -1,3 +1,11 @@
+.statusOperationnal .panel-body {
+  background-color: #cfc;
+}
+
+.statusNotOperationnal .panel-body {
+  background-color: #fcc;
+}
+
 .progress {
   margin-bottom: 0px;
 }
