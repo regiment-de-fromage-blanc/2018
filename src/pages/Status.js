@@ -40,17 +40,17 @@ class Status extends React.Component {
       {
         name: 'Téléphone',
         status: 'Opérationnel',
-        battery: '60'
+        battery: 60
       },
       {
         name: 'R2D2',
         status: 'Opérationnel',
-        battery: '98'
+        battery: 98
       },
       {
         name: 'Détecteur de mouvement',
         status: 'Non opérationnel',
-        battery: '27'
+        battery: 27
       }
     ];
 
