@@ -58,7 +58,7 @@ class Status extends React.Component {
       const allIssues = [
         'Pas de réseau non filaire détecté.',
         'Opérations en cours, veuillez patientez.',
-        'Mémoire surchargée, veuillez la vider'
+        'Mémoire surchargée, veuillez la vider.'
       ];
       let possibleIssues = allIssues.slice(0, allIssues.length);
       const nbIssues = Math.trunc(Math.random() * allIssues.length);
