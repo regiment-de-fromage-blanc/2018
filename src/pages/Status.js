@@ -47,6 +47,15 @@ class Status extends React.Component {
   };
 
   render() {
+    // This 'states' is directly declared in the code because
+    // we don't have the devices to get our measurements
+
+    // states is an array of state
+    // state is composed of
+    // * name (String) -> name of the device
+    // * battery (number) -> level of battery
+    // * operationnal (boolean) -> is the device operationnal ?
+    // * issues (String[]) (optional) -> error messages
     const states = [
       {
         name: 'Téléphone',
