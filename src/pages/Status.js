@@ -9,16 +9,16 @@ class Status extends React.Component {
       <Col
         xs={12}
         className={
-          state.status === 'Opérationnel'
-            ? 'statusOperationnal'
-            : 'statusNotOperationnal'
+          state.operationnal ? 'statusOperationnal' : 'statusNotOperationnal'
         }
       >
         <Panel>
           <Panel.Heading>
             <Panel.Title componentClass="h3">{state.name}</Panel.Title>
           </Panel.Heading>
-          <Panel.Body>{state.status}</Panel.Body>
+          <Panel.Body>
+            {state.operationnal ? 'Opérationnel' : 'Non opérationnel'}
+          </Panel.Body>
           <ProgressBar
             now={state.battery}
             label={`${state.battery}%`}
@@ -39,17 +39,17 @@ class Status extends React.Component {
     const states = [
       {
         name: 'Téléphone',
-        status: 'Opérationnel',
+        operationnal: true,
         battery: 60
       },
       {
         name: 'R2D2',
-        status: 'Opérationnel',
+        operationnal: true,
         battery: 98
       },
       {
         name: 'Détecteur de mouvement',
-        status: 'Non opérationnel',
+        operationnal: false,
         battery: 27
       }
     ];
