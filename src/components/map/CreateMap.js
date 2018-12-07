@@ -1,21 +1,72 @@
 import React, { Component } from 'react';
-import { Map, TileLayer } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 
-const stamenTonerTiles =
-  'http://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png';
+const stamenTonerTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const stamenTonerAttr =
-  'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-const mapCenter = [39.9528, -75.1638];
-const zoomLevel = 12;
+  '<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+const zoomLevel = 10;
+const defaultLo = [45, 5];
+const gettingCoords =
+  'Getting your position... Please, share your position with us !';
 
-export default class Map extends Component {
-  render() {
+export default class View extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      position: null
+    };
+    let getPosition = new Promise(function(resolve, reject) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        console.log(position.coords);
+        resolve(position.coords);
+      });
+    });
+
+    getPosition
+      .then(val => {
+        console.log(val);
+        this.setState({
+          loading: false,
+          position: val
+        });
+        console.log(this.state);
+      })
+      .catch(console.error);
+  }
+
+  renderLoaded() {
     return (
       <div>
-        <Map center={mapCenter} zoom={zoomLevel}>
+        <Map
+          center={[this.state.position.latitude, this.state.position.longitude]}
+          zoom={zoomLevel}
+        >
           <TileLayer attribution={stamenTonerAttr} url={stamenTonerTiles} />
+          <Marker
+            position={[
+              this.state.position.latitude,
+              this.state.position.longitude
+            ]}
+          >
+            <Popup>Vous êtes ici.</Popup>
+          </Marker>
         </Map>
+        <p>Où voulez-vous aller?</p>
+        <form>
+          <label>
+            Destination:
+            <input type="text" name="name" />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
       </div>
+    );
+  }
+
+  render() {
+    return (
+      <div>{this.state.loading ? gettingCoords : this.renderLoaded()}</div>
     );
   }
 }
