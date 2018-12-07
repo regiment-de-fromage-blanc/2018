@@ -34,16 +34,15 @@ export default class View extends Component {
 
     getPosition
       .then(val => {
-        console.log(val);
         this.setState({
           loading: false,
           position: val,
           address: '',
           city: '',
-          lat: null,
-          lon: null
+          lat: 100,
+          lon: 100,
+          latLng: [0, 0]
         });
-        console.log(this.state);
       })
       .catch(console.error);
   }
@@ -58,7 +57,6 @@ export default class View extends Component {
         this.getDestinationCoords(this.state.address, this.state.city);
       }
     );
-    console.log(event);
   }
 
   handleSubmit() {
@@ -83,18 +81,78 @@ export default class View extends Component {
       .then(responseJson => {
         this.state.lat = responseJson[0].lat;
         this.state.lon = responseJson[0].lon;
-        return this.state;
+
+        this.state.latLng = [this.state.lat, this.state.lon];
+        return this.state.latLng;
       })
-      .then(data => console.log(data))
+      .then(data => this.renderWithMarkers(data))
       .catch(error => {
         console.error(error);
       });
+  }
+
+  renderWithMarkers(data) {
+    return (
+      <div>
+        <Map
+          ref="map"
+          center={[this.state.position.latitude, this.state.position.longitude]}
+          zoom={zoomLevel}
+        >
+          <TileLayer attribution={stamenTonerAttr} url={stamenTonerTiles} />
+          <Marker
+            position={[
+              this.state.position.latitude,
+              this.state.position.longitude
+            ]}
+          >
+            <Popup>Vous êtes ici.</Popup>
+          </Marker>
+          <Marker position={data}>
+            <Popup>Votre destination.</Popup>
+          </Marker>
+        </Map>
+        <Form horizontal>
+          <h4>Destination: </h4>
+          <FormGroup controlId="formAddress">
+            <Col componentClass={ControlLabel} sm={2} />
+            <Col sm={10}>
+              <FormControl
+                type="text"
+                value={this.state.address}
+                placeholder="Adresse"
+                onChange={event =>
+                  this.setState({ address: event.target.value })
+                }
+              />
+            </Col>
+          </FormGroup>
+          <FormGroup controlId="formCity">
+            <Col componentClass={ControlLabel} sm={2} />
+            <Col sm={10}>
+              <FormControl
+                type="text"
+                value={this.state.city}
+                placeholder="Ville"
+                onChange={event => this.setState({ city: event.target.value })}
+              />
+            </Col>
+          </FormGroup>
+          <FormGroup>
+            <Col smOffset={2} sm={10}>
+              <Button onClick={() => this.handleSubmit()}>Chercher</Button>
+            </Col>
+          </FormGroup>
+        </Form>
+      </div>
+    );
   }
 
   renderLoaded() {
     return (
       <div>
         <Map
+          ref="map"
           center={[this.state.position.latitude, this.state.position.longitude]}
           zoom={zoomLevel}
         >
